@@ -1,6 +1,6 @@
 {
   "name": "@recaptime-dev/utils",
-  "version": "1.0.0",
+  "version": "2022.5.0",
   "description": "Utilities Recap Time Squad written for use in Deno and beyond, in one package.",
   "scripts": {
     "gitpod:build": "DOCKER_BUILDKIT=1 docker build -t ghcr.io/gitpodify/local-build --file .gitpod.Dockerfile .",
