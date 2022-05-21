@@ -1,17 +1,49 @@
-# Gitpodified Repo Starter Pack
+# Utility Libraries for Recap Time projects in Deno
 
-An GitHub template usually Recap Time Squad uses on our fresh projects, with preloaded extensions and custom Dockerfile, for your next project with Gitpod.
+## Usage
 
-While it might be a bit opinionated on our case (setting `DOCKER_BUILDKIT=1`, using Node.js gitignore template, using `package-lock.json` for npm instead of Yarn Modern/pnpm, etc.), we made this repo so you can easily get a new project up and running in Gitpod, together with some utility scripts to help you maintain your custom workspace image.
+```ts
+// Either in mod.ts or straight to your Deno code via mod.ts
 
-Note that CI part of things and even Hadolint configuration are not part of this template, so you may need to write them manually.
+// Using Deno's official registry for 3rd-party packages with versioning
+// Replace vYYYY.MM.XX with either the latest version or any previous ones.
+import { longUrlBuilder, addLink } from "https://deno.land/x/recaptimedotdev_utils@vYYYY.MM.XX/lib/@recaptime-dev/firebase-dynamiclinks-web/mod.ts"
 
-## Getting started
+const linkMetadata = longUrlBuilder({
+    dynamicLinkPrefix: "https://recaptime.page.link",
+    link: "https://gitpod.io/#gitlab.cm/gitpodify/templates/nodejs-deno",
+    st: "Gitpodified Repo Starter Pack | gitpodify.dev",
+    sd: "An template repository with TypeScript, some linters and other tools preloaded, alongside Node.js and Deno."
+})
 
-**GitHub users**: Either duplicate this repo through the regular repo creation workflow OR use the repo generator by clicking `Use this template` button.
+await addLink(Deno.env.FIREBASE_API_KEY, linkMetadata)
 
-**GitLab SaaS users**: Fork the repo then remove its fork association from Settings -> General -> Advanced OR `git clone`, `git remote set-url origin`, then `git push`.
+// Straight from GitHub/GitLab on main branch - NOT RECOMENDED IF USING LOCKFILE OR VENDORING
+import { getCWData } from "https://github.com/RecapTime/deno-utils-lib/raw/main/lib/@community-radar-recaptime/content-warnings/mod.ts"
 
-## License
+console.log(getCWData("https://www.youtube.com/watch?v=UKIlwncMbqo"))
+// {
+//  ok: "true",
+//  result: {
+//    hasCW: true,
+//    reason: "Video flagged due to derealization by Dream Team Wiki admins",
+//    addedBy: "https://gitlab.com/ajhalili2006"
+//    linkToIssue: null,
+//    linkToSource: "https://dreamteam.fandom.com/wiki/Template:ContentWarningData?direction=next&oldid=63721&action=raw",
+//    linkPreviewShortlink: "https://contentwarnings.page.link/..."
+//  }
+// }
+```
 
-**Template repo and contributions**: MIT, although you don't need to credit us but that's also fine too if you will.
+```js
+// dist.js for Node.js and elsewhere in an polyfilled dist.js in each subpackage
+import { checkServiceStatus } from "https://cdn.deno.land/recaptimedotdev_utils@vYYYY.MM.XX/lib/@recaptime-dev/provisioning-api/dist.js"
+
+console.log(checkServiceStatus("gitpodify.dev", "cloudsmith"))
+// { ok: true, result: { url: "https://api.cloudsmith.io/v1/packages/gitpodify/gitpodified-workspace-images/", httpStatus: 200 } }
+```
+
+
+## Contributing
+
+TBD
