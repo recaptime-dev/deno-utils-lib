@@ -4,9 +4,15 @@ image:
   context: .
 tasks:
   # An regular npm-based setup with direnv allow for your dotenv file
-  - init: npm i
-    before: direnv allow || true
+  - init: |
+      mkdir /workspace/.deno-cache
+      echo "export DENO_DIR=/workspace/.deno-cache" >> .envrc
+    before: |
+      direnv allow || true
+      deno cache lib/@community-radar-recaptime/content-warnings/deps.ts
     command: echo hi mom!
+    env:
+      DENO_DIR: /workspace/.deno-cache
 vscode:
   extensions:
     - vivaxy.vscode-conventional-commits
