@@ -1,0 +1,20 @@
+{
+  "name": "@community-radar-recaptime/content-warnings",
+  "version": "0.1.0",
+  "description": "API Wrapper for Community Radar Content Warnings API",
+  "main": "mod.ts",
+  "scripts": {
+    "test": "deno test mod.test.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RecapTime/deno-utils-lib.git",
+    "directory": "lib/@community-radar-recaptime/content-warnings"
+  },
+  "author": "Recap Time Squad <recaptimesquad@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RecapTime/deno-utils-lib/issues"
+  },
+  "homepage": "https://github.com/RecapTime/deno-utils-lib#readme"
+}
