@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - .gitpod.Dockerfile
+  pull_request:
+    branches: [ main ]
+    paths:
+      - .gitpod.Dockerfile
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build custom Gitpod workspace Dockerfile
+      run: docker build . --file .gitpod.Dockerfile --tag ghcr.io/RecapTime/deno-utils-lib:gitpod-ws
