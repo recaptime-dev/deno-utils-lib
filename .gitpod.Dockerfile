@@ -1,5 +1,4 @@
-# In this example, we use the default gitpod/workspace-full image here, but feel free to change.
-FROM gitpod/workspace-full
+FROM ghcr.io/gitpodify/gitpodified-workspace-images/dazzle-build-artifact/full:dazzle-build-2022-05-19-10-23-11
 
 # Step 0: Make sure we're using bash instead of plain sh
 # Related Moby and Docker Docs issues:
@@ -31,7 +30,7 @@ RUN brew install vault \
 RUN curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh \
     && mkdir -p /home/gitpod/.deno/bin \
     && DENO_INSTALL_ROOT=/home/gitpod/.deno/bin deno install --allow-read --allow-run --allow-write -f --unstable https://deno.land/x/denon/denon.ts \
-    && DENO_INSTALL_ROOT=/home/gitpod/.deno/bin deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
+    && DENO_INSTALL_ROOT=/home/gitpod/.deno/bin deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts \
     && printf "export DENO_DIR=/workspace/.deno DENO_INSTALL=/usr/local DENO_INSTALL_ROOT=/home/gitpod/.deno/bin" | tee --append ~/.bashrc
 ENV DENO_DIR=/workspace/.deno DENO_INSTALL=/usr/local DENO_INSTALL_ROOT=/home/gitpod/.deno/bin
 ENV PATH=$PATH:${DENO_INSTALL_ROOT}
