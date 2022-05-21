@@ -1,14 +1,16 @@
-name: Docker Image CI
+name: Gitpod Workspace Image CI
 
 on:
   push:
     branches: [ main ]
     paths:
       - .gitpod.Dockerfile
+      - .trigger-build
   pull_request:
     branches: [ main ]
     paths:
       - .gitpod.Dockerfile
+      - .trigger-build
 
 jobs:
 
@@ -20,3 +22,5 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build custom Gitpod workspace Dockerfile
       run: docker build . --file .gitpod.Dockerfile --tag ghcr.io/RecapTime/deno-utils-lib:gitpod-ws
+      env:
+        DOCKER_BUILDKIT: "1"
