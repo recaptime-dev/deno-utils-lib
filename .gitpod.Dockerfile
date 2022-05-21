@@ -26,3 +26,11 @@ RUN brew install vault \
     && curl -sLf --retry 3 --tlsv1.2 --proto "=https" 'https://packages.doppler.com/public/cli/gpg.DE2A7741A397C129.key' | sudo apt-key add -\
     && echo "deb https://packages.doppler.com/public/cli/deb/debian any-version main" | sudo tee /etc/apt/sources.list.d/doppler-cli.list \
     && sudo install-packages doppler
+
+# Finally, install Deno and related tooling, such as Deno Deploy's deployctl and stuff.
+RUN curl -fsSL https://deno.land/x/install/install.sh | sudo DENO_INSTALL=/usr/local sh \
+    && mkdir -p /home/gitpod/.deno/bin \
+    && DENO_INSTALL_ROOT=/home/gitpod/.deno/bin deno install --allow-read --allow-run --allow-write -f --unstable https://deno.land/x/denon/denon.ts \
+    && printf "export DENO_DIR=/workspace/.deno DENO_INSTALL=/usr/local DENO_INSTALL_ROOT=/home/gitpod/.deno/bin" | tee --apend ~/.bashrc
+ENV DENO_DIR=/workspace/.deno DENO_INSTALL=/usr/local DENO_INSTALL_ROOT=/home/gitpod/.deno/bin
+ENV PATH=$PATH:${DENO_INSTALL_ROOT}

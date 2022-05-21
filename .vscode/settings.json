@@ -1,0 +1,11 @@
+{
+    "deno.enable": true,
+    "deno.lint": true,
+    "deno.unstable": true,
+    "[ts]": {
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    },
+    "[tsx]":{
+        "editor.defaultFormatter": "denoland.vscode-deno"
+    }
+}
