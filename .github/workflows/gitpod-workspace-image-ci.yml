@@ -6,7 +6,7 @@ on:
     paths:
       - .gitpod.Dockerfile
       - .trigger-build
-      - github/workflows/gitpod-workspace-image-ci.yml
+      - .github/workflows/gitpod-workspace-image-ci.yml
   pull_request:
     branches: [ main ]
     paths:
